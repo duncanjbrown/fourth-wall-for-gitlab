@@ -15,9 +15,6 @@
     if (FourthWall.gistId) {
       promises.push(fetchReposFromGist());
     }
-    if (FourthWall.hasTeams()) {
-      promises.push(fetchReposFromTeams());
-    }
 
     var d = $.Deferred();
     $.when.apply(null, promises).done(function() {
@@ -96,67 +93,4 @@
       }
     });
   };
-
-  var fetchReposFromTeams = function () {
-    var promises = [];
-
-    FourthWall.getTeams().forEach(function(team) {
-      promises.push(fetchReposFromTeam(team));
-    });
-
-    var d = $.Deferred();
-    $.when.apply(null, promises).done(function() {
-      var repos = [].reduce.call(arguments, FetchRepos.mergeRepoArrays, []);
-      d.resolve(repos);
-    });
-
-    return d.promise();
-  };
-
-  var fetchReposFromTeam = function(team) {
-    var d = $.Deferred();
-    fetchTeamId(team).done(function(teamId) {
-      FourthWall.fetchDefer({
-        url: team.baseUrl + "/teams/" + teamId + "/repos",
-        data: { per_page: 100 },
-        done: function (result) {
-          d.resolve(result.map(function(item) {
-            return {
-              repo: item.name,
-              userName: item.owner.login,
-              baseUrl: team.baseUrl + "/repos",
-            };
-          }));
-        }
-      });
-
-      FourthWall.fetchDefer({
-        url: team.baseUrl + "/teams/" + teamId + "/members",
-        done: function (result) {
-          result.forEach(function(member) {
-            FourthWall.importantUsers.push(member.login)
-          });
-        }
-      });
-    });
-    return d;
-  };
-
-  var fetchTeamId = function(team) {
-    return FourthWall.fetchDefer({
-      // team.list results are paginated, try and get as many in the first page
-      // as possible to map slug-to-id (github max is 100 per-page)
-      url: team.baseUrl + '/orgs/' + team.org + '/teams',
-      data: { per_page: 100 },
-      done: function (result) {
-        for (var i = 0; i < result.length; i++) {
-          if (result[i].slug === team.team) {
-            return result[i].id;
-          }
-        }
-        throw "Couldn't map team '" + team.team + "' to an ID"
-      }
-    });
-  };
-
 }());

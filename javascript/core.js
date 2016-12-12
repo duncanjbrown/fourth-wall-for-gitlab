@@ -45,41 +45,6 @@
     return FourthWall.getQueryVariable('token');
   };
 
-  FourthWall.hasTeams = function() {
-    return FourthWall.getTeams().length > 0;
-  };
-
-  FourthWall.getTeams = function() {
-    var params = FourthWall.getQueryVariables();
-    var teams = [];
-    Object.keys(params).filter(function(key) {
-      var match = key.match(/team$/);
-      return match && match[0] == 'team';
-    }).forEach(function(key) {
-      var hostname = key.match(/^(.*?)_?team$/)[1];
-      if (hostname === "") {
-        hostname = "api.github.com";
-      }
-      var teamStrings = params[key];
-      if (! (teamStrings instanceof Array)) {
-        teamStrings = [teamStrings];
-      }
-      teamStrings.forEach(function(teamStr) {
-        var fullTeamName = stripSlash(teamStr).split('/');
-        if (fullTeamName.length !== 2) {
-          throw "Team name must contain a slash {org}/{team}";
-        }
-        teams.push({
-          org: fullTeamName[0],
-          team: fullTeamName[1],
-          hostname: hostname,
-          baseUrl: getBaseUrlFromHostname(hostname),
-        });
-      });
-    });
-    return teams;
-  };
-
   function getBaseUrlFromHostname(hostname) {
     if (hostname === "api.github.com") {
       return "https://api.github.com";
