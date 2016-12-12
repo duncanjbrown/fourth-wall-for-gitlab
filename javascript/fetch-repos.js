@@ -9,9 +9,6 @@
   FourthWall.FetchRepos.fetchFromEverywhere = function () {
     var promises = [];
 
-    if (FourthWall.fileUrl) {
-      promises.push(fetchReposFromFileUrl());
-    }
     if (FourthWall.gistId) {
       promises.push(fetchReposFromGist());
     }
@@ -41,29 +38,6 @@
       });
     }
     return result;
-  };
-
-  var fetchReposFromFileUrl = function () {
-    // e.g. https://api.github.com/repos/roc/deploy-lag-radiator/contents/repos/performance-platform.json?ref=gh-pages
-    return FourthWall.fetchDefer({
-      url: FourthWall.fileUrl,
-      done: function(result) {
-        var repos = [];
-        if (result.content) {
-          repos = JSON.parse(
-            atob(result.content)
-          ).map(function (item) {
-            // map to ensure gist style keys present
-            // we extend the item to ensure any provided baseUrls are kept
-            return $.extend(item, {
-              'userName': item.owner || item.userName,
-              'repo': item.name ||  item.repo
-            });
-          });
-        }
-        return repos;
-      }
-    });
   };
 
   var fetchReposFromGist = function () {
