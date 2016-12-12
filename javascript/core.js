@@ -93,9 +93,6 @@
   FourthWall.gistId = stripSlash(
     FourthWall.getQueryVariable('gist')
   );
-  FourthWall.fileUrl = stripSlash(
-    FourthWall.getQueryVariable('file')
-  );
   FourthWall.importantUsers = [];
 
 })();
