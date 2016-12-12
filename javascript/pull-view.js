@@ -21,10 +21,6 @@
 
       this.$el.addClass(this.ageClass(this.model.get('elapsed_time')));
 
-      if (FourthWall.filterUsers && FourthWall.importantUsers.length > 0 && $.inArray(this.model.get('user').login, FourthWall.importantUsers) == -1) {
-        this.$el.addClass('unimportant-user');
-      }
-
       if (!this.model.collection.important) {
         this.$el.addClass('unimportant-repo');
       }
