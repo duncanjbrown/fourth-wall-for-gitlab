@@ -15,9 +15,6 @@
     if (FourthWall.gistId) {
       promises.push(fetchReposFromGist());
     }
-    if (FourthWall.hasTeams()) {
-      promises.push(fetchReposFromTeams());
-    }
 
     var d = $.Deferred();
     $.when.apply(null, promises).done(function() {
