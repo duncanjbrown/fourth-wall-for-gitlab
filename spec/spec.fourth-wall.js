@@ -51,50 +51,11 @@ describe("Fourth Wall", function () {
   });
 
   describe("getToken", function () {
-    beforeEach(function () {
-      spyOn(FourthWall, 'getQueryVariable');
-      FourthWall.getQueryVariable.plan = function(name) {
-        return {
-          "api.github.com_token": "com-token",
-          "token": "default-token",
-          "github.gds_token": "gds-token"
-        }[name];
-      };
-    });
-
-    it("returns correct enterprise token", function() {
-      expect(FourthWall.getToken('github.gds')).toEqual("gds-token");
-    });
-
-    it("returns correct github.com token", function() {
-      expect(FourthWall.getToken('api.github.com')).toEqual("com-token");
-    });
-
-    it("falls back to default token for github.com", function() {
-      FourthWall.getQueryVariable.plan = function(name) {
-        return {
-          "token": "default-token",
-          "github.gds_token": "gds-token"
-        }[name];
-      };
-
-      expect(FourthWall.getToken('api.github.com')).toEqual("default-token");
-    })
-  });
-
-  describe("getTokenFromUrl", function() {
     beforeEach(function() {
-      spyOn(FourthWall, 'getToken');
+      spyOn(FourthWall, '_getLocationSearch').andReturn('?token=foo');
     });
-
-    it("extracts github.com hostname", function() {
-      FourthWall.getTokenFromUrl("http://api.github.com/foo/bar");
-      expect(FourthWall.getToken).toHaveBeenCalledWith("api.github.com");
-    });
-
-    it("extracts enterprise github hostname", function() {
-      FourthWall.getTokenFromUrl("http://github.gds/foo/bar");
-      expect(FourthWall.getToken).toHaveBeenCalledWith("github.gds");
+    it('returns the token param from the query string', function() {
+      expect(FourthWall.getToken('token=foo')).toEqual("foo");
     });
   });
 

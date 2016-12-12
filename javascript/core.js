@@ -41,18 +41,8 @@
     return param_string;
   };
 
-  FourthWall.getToken = function (hostname) {
-    var token = FourthWall.getQueryVariable(hostname+'_token');
-    if (token === undefined && hostname == 'api.github.com') {
-      token = FourthWall.getQueryVariable('token');
-    }
-    return token;
-  };
-
-  FourthWall.getTokenFromUrl = function (url) {
-    var a = document.createElement('a');
-    a.href = url;
-    return FourthWall.getToken(a.hostname);
+  FourthWall.getToken = function() {
+    return FourthWall.getQueryVariable('token');
   };
 
   FourthWall.hasTeams = function() {
@@ -120,7 +110,7 @@
 
   var setupAuthentication = function (baseUrl) {
     return function(xhr) {
-      var token = FourthWall.getTokenFromUrl(baseUrl);
+      var token = FourthWall.getToken();
       if (token !== false && token !== '') {
         xhr.setRequestHeader('Authorization', 'token ' + token);
         xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
