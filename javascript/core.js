@@ -65,9 +65,10 @@
 
   FourthWall.fetchDefer = function(options) {
     var d = $.Deferred();
+    var needsAuthentication = !options.url.match(/api\.github\.com\/gists/);
     $.ajax({
       type: "GET",
-      beforeSend: setupAuthentication(options.url),
+      beforeSend: needsAuthentication ? setupAuthentication(options.url) : function(){},
       url: options.url,
       data: options.data
     }).done(function(result) {
