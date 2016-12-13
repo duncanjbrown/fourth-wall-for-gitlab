@@ -48,14 +48,7 @@
         Object.keys(result.files).forEach(function(file) {
           var fileData = result.files[file],
               language = fileData.language;
-          if (file == "users.json") {
-            if (fileData.content) {
-              FourthWall.importantUsers = $.merge(
-                FourthWall.importantUsers,
-                JSON.parse(fileData.content)
-              );
-            }
-          } else if ($.inArray(language, ['JavaScript', 'JSON', null]) !== -1) {
+          if ($.inArray(language, ['JavaScript', 'JSON', null]) !== -1) {
             repos = JSON.parse(fileData.content);
           } else if (language === "CSS") {
             var $custom_css = $('<style>');

@@ -2,8 +2,6 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
   
-  FourthWall.importantUsers = [];
-
   FourthWall.getQueryVariables = function(search) {
     search = search || FourthWall._getLocationSearch();
     return search
@@ -93,6 +91,4 @@
   FourthWall.gistId = stripSlash(
     FourthWall.getQueryVariable('gist')
   );
-  FourthWall.importantUsers = [];
-
 })();
