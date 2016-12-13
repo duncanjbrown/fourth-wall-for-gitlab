@@ -14,9 +14,9 @@
         sha: 'master'
       });
 
-      // this.master.on('change:failed', function () {
-      //   this.trigger('change');
-      // }, this);
+      this.master.on('change:failed', function () {
+        this.trigger('change');
+      }, this);
       //
       // this.pulls = new FourthWall.GitHubPulls([], {
       //   baseUrl: this.get('baseUrl'),
