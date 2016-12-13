@@ -194,6 +194,8 @@ describe("Fourth Wall", function () {
         var pulls = new FourthWall.GitLabPulls([], {
           repo: 'dxw/my-repo',
           baseUrl: 'https://my.gitlab.com/api/v3/projects'
+        }, {
+          collection: {}
         });
         expect(pulls.url()).toBe('https://my.gitlab.com/api/v3/projects/dxw/my-repo/merge_requests?state=opened')
       });
@@ -203,6 +205,29 @@ describe("Fourth Wall", function () {
   describe("GitLabPull", function() {
     xdescribe("callbacks", function() {
       it("behaves just like a GitHubPull", function() {});
+    });
+
+    describe("getAuthor*", function() {
+      it("returns the author name", function() {
+        var pull = new FourthWall.GitLabPull({
+          author: {
+            name: "Nigel Tufnel"
+          }
+        }, {
+          collection: {}
+        });
+        expect(pull.getAuthorName()).toBe('Nigel Tufnel');
+      });
+      it("returns the author avatar", function() {
+        var pull = new FourthWall.GitLabPull({
+          author: {
+            avatar_url: "http://gravatar.com/foo"
+          }
+        }, {
+          collection: {}
+        });
+        expect(pull.getAuthorAvatar()).toBe('http://gravatar.com/foo');
+      });
     });
   });
 

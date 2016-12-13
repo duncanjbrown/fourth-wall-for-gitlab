@@ -46,6 +46,14 @@
       // this.info.fetch();
     },
 
+    getAuthorName: function() {
+      return this.get('author').name;
+    },
+
+    getAuthorAvatar: function() {
+      return this.get('author').avatar_url;
+    },
+
     // parse: function (data) {
     //   data.elapsed_time = this.elapsedSeconds(data.created_at);
     //   return data;

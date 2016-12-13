@@ -13,9 +13,13 @@
     render: function () {
       this.$el.removeClass();
 
-      if (!this.model.get('user')) {
+      window.x =this.model;
+
+      if (!this.model.getAuthorName()) {
         // FIXME: Should never get here but does after master was
         // failing
+        // ^ This comment was added for github api. I'm leaving
+        // it for now because I don't understand it
         return;
       }
 
