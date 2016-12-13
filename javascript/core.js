@@ -68,7 +68,7 @@
     var needsAuthentication = !options.url.match(/api\.github\.com\/gists/);
     $.ajax({
       type: "GET",
-      beforeSend: needsAuthentication ? setupAuthentication(options.url) : function(){},
+      beforeSend: needsAuthentication ? setupGitLabAuthentication(options.url) : function(){},
       url: options.url,
       data: options.data
     }).done(function(result) {
@@ -80,11 +80,20 @@
 
   FourthWall.overrideFetch = function(url) {
     return Backbone.Model.prototype.fetch.apply(this, [{
-      beforeSend: setupAuthentication(url)
+      beforeSend: setupGitLabAuthentication(url)
     }]);
   };
 
-  var setupAuthentication = function (baseUrl) {
+  var setupGitLabAuthentication = function (baseUrl) {
+    return function(xhr) {
+      var token = FourthWall.getToken();
+      if (token !== false && token !== '') {
+        xhr.setRequestHeader('PRIVATE-TOKEN', token);
+      }
+    };
+  };
+
+  var setupGitHubAuthentication = function (baseUrl) {
     return function(xhr) {
       var token = FourthWall.getToken();
       if (token !== false && token !== '') {
