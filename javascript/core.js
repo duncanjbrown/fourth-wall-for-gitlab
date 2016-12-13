@@ -43,14 +43,6 @@
     return FourthWall.getQueryVariable('token');
   };
 
-  function getBaseUrlFromHostname(hostname) {
-    if (hostname === "api.github.com") {
-      return "https://api.github.com";
-    } else {
-      return "https://" + hostname + "/api/v3";
-    }
-  }
-
   FourthWall.fetchDefer = function(options) {
     var d = $.Deferred();
     $.ajax({
