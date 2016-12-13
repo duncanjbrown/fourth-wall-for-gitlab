@@ -204,6 +204,15 @@ describe("Fourth Wall", function () {
     xdescribe("callbacks", function() {
       it("behaves just like a GitHubPull", function() {});
     });
+
+    describe("getAuthor*", function() {
+      it("returns the author name", function() {
+        TODO
+      });
+      it("returns the author avatar", function() {
+        TODO
+      });
+    });
   });
 
   describe("GitLabStatus", function () {
@@ -309,6 +318,15 @@ describe("Fourth Wall", function () {
         });
         pull.info.set('foo', 'bar');
         expect(changed).toBe(true);
+      });
+    });
+
+    describe("getAuthor*", function() {
+      it("returns the author name", function() {
+        TODO
+      });
+      it("returns the author avatar", function() {
+        TODO
       });
     });
 

@@ -13,10 +13,12 @@
     render: function () {
       this.$el.removeClass();
 
+      window.x =this.model;
+
       if (!this.model.get('user')) {
         // FIXME: Should never get here but does after master was
         // failing
-        return;
+        //return;
       }
 
       this.$el.addClass(this.ageClass(this.model.get('elapsed_time')));
