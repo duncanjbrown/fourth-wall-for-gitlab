@@ -32,6 +32,18 @@
     return 'https://' + gitLabHost + '/api/v3';
   }
 
+  FourthWall.getGitHubApiUrl = function() {
+    return 'https://api.github.com';
+  }
+
+  FourthWall.getRepositoryEndpoint = function(github = false) {
+    if(github) {
+      return FourthWall.getGitHubApiUrl() + '/repos';
+    } else {
+      return FourthWall.getGitLabApiUrl() + '/projects';
+    }
+  };
+
   FourthWall._getLocationSearch = function() {
     return window.location.search;
   };
