@@ -168,7 +168,6 @@ describe("Fourth Wall", function () {
         expect(changed).toBe(true);
       });
 
-
     });
 
     describe("fetch", function () {
@@ -182,6 +181,9 @@ describe("Fourth Wall", function () {
     });
   });
 
+  xdescribe("GitLabRepo", function() {
+    it("behaves just like a GitHubRepo in all other respects", function() {});
+  });
 
   describe("GitLabPulls", function () {
     describe("fetch", function () {
