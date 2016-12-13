@@ -25,7 +25,7 @@
     },
 
     parse: function (response) {
-      if (!response.length) {
+      if(!response) {
         return;
       }
       response.created_at = moment(response.created_at);

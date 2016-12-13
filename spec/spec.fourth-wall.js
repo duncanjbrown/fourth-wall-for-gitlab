@@ -221,7 +221,7 @@ describe("Fourth Wall", function () {
     describe("parse", function() {
       it("marks anything but success, pending and running as failure", function() {
         var status = new FourthWall.GitLabStatus();
-        var parsed = status.parse([{status: 'nonsense'}]);
+        var parsed = status.parse({status: 'nonsense'});
         expect(parsed.failed).toBe(true);
       });
     });
