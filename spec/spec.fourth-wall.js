@@ -183,7 +183,7 @@ describe("Fourth Wall", function () {
   });
 
 
-  describe("GitLabPull", function () {
+  xdescribe("GitLabPull", function () {
     describe("initialize", function () {
       var pull;
 
@@ -191,12 +191,34 @@ describe("Fourth Wall", function () {
         spyOn(FourthWall.GitLabStatus.prototype, "fetch");
       });
 
-      it("instantiates an internal Status model", function () {
-        expect(pull.status instanceof FourthWall.GitLabStatus).toBe(true);
+      it("does not work", function () {
+        expect(true).toBe(false);
       });
     });
   });
 
+  describe("GitLabStatus", function () {
+    describe("fetch", function () {
+      it("calls out to the appropriate URL", function () {
+        var status = new FourthWall.GitLabStatus({
+          baseUrl: 'https://my.gitlab.com/api/v3',
+          sha: 'abc123',
+          projectId: 1
+        });
+        expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/1/repository/commits/abc123/builds');
+      });
+    });
+
+    describe("parse", function() {
+      it("marks anything but success, pending and running as failure", function() {
+        console.log('hi');
+        var status = new FourthWall.GitLabStatus();
+        var parsed = status.parse([{status: 'nonsense'}]);
+        expect(parsed.failed).toBe(true);
+      });
+    });
+
+  });
 
   describe("GitHubPull", function () {
     describe("initialize", function () {
