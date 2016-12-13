@@ -4,7 +4,7 @@
 
   FourthWall.Repos = Backbone.Collection.extend({
 
-    model: FourthWall.GitHubRepo,
+    model: FourthWall.GitLabRepo,
 
     initialize: function () {
       this.on('reset add remove', function () {
