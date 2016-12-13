@@ -182,7 +182,23 @@ describe("Fourth Wall", function () {
     });
   });
 
-  describe("Pull", function () {
+
+  describe("GitLabPull", function () {
+    describe("initialize", function () {
+      var pull;
+
+      beforeEach(function() {
+        spyOn(FourthWall.GitLabStatus.prototype, "fetch");
+      });
+
+      it("instantiates an internal Status model", function () {
+        expect(pull.status instanceof FourthWall.GitLabStatus).toBe(true);
+      });
+    });
+  });
+
+
+  describe("GitHubPull", function () {
     describe("initialize", function () {
 
       var pull;
