@@ -149,17 +149,17 @@ describe("Fourth Wall", function () {
   describe("Repo", function () {
     describe("initialize", function () {
       it("instantiates an internal Master model", function () {
-        var repo = new FourthWall.Repo();
-        expect(repo.master instanceof FourthWall.MasterStatus).toBe(true);
+        var repo = new FourthWall.GitHubRepo();
+        expect(repo.master instanceof FourthWall.GitHubMasterStatus).toBe(true);
       });
 
       it("instantiates an internal list of pull requests", function () {
-        var repo = new FourthWall.Repo();
-        expect(repo.pulls instanceof FourthWall.Pulls).toBe(true);
+        var repo = new FourthWall.GitHubRepo();
+        expect(repo.pulls instanceof FourthWall.GitHubPulls).toBe(true);
       });
 
       it("triggers a change when the master status changes", function () {
-        var repo = new FourthWall.Repo();
+        var repo = new FourthWall.GitHubRepo();
         var changed = false;
         repo.on('change', function () {
           changed = true;
@@ -167,13 +167,15 @@ describe("Fourth Wall", function () {
         repo.master.set('failed', 'true');
         expect(changed).toBe(true);
       });
+
+
     });
 
     describe("fetch", function () {
       it("fetches new master and pulls data", function () {
-        spyOn(FourthWall.MasterStatus.prototype, "fetch");
-        spyOn(FourthWall.Pulls.prototype, "fetch");
-        var repo = new FourthWall.Repo();
+        spyOn(FourthWall.GitHubMasterStatus.prototype, "fetch");
+        spyOn(FourthWall.GitHubPulls.prototype, "fetch");
+        var repo = new FourthWall.GitHubRepo();
         repo.fetch();
         expect(repo.master.fetch).toHaveBeenCalled();
       });
@@ -185,10 +187,10 @@ describe("Fourth Wall", function () {
 
       var pull;
       beforeEach(function() {
-        spyOn(FourthWall.Comment.prototype, "fetch");
-        spyOn(FourthWall.Status.prototype, "fetch");
-        spyOn(FourthWall.Info.prototype, "fetch");
-        pull = new FourthWall.Pull({
+        spyOn(FourthWall.GitHubComment.prototype, "fetch");
+        spyOn(FourthWall.GitHubStatus.prototype, "fetch");
+        spyOn(FourthWall.GitHubInfo.prototype, "fetch");
+        pull = new FourthWall.GitHubPull({
           head: {sha: 'foo'}
         }, {
           collection: {}
@@ -196,7 +198,7 @@ describe("Fourth Wall", function () {
       });
 
       it("instantiates an internal Comment model", function () {
-        expect(pull.comment instanceof FourthWall.Comment).toBe(true);
+        expect(pull.comment instanceof FourthWall.GitHubComment).toBe(true);
       });
 
       it("triggers a change when the comment changes", function () {
@@ -220,7 +222,7 @@ describe("Fourth Wall", function () {
       });
 
       it("instantiates an internal Status model", function () {
-        expect(pull.status instanceof FourthWall.Status).toBe(true);
+        expect(pull.status instanceof FourthWall.GitHubStatus).toBe(true);
       });
 
       it("fetches new status data when the head changes", function () {
@@ -237,7 +239,7 @@ describe("Fourth Wall", function () {
         expect(changed).toBe(true);
       });
       it("instantiates an internal Info model", function () {
-        expect(pull.info instanceof FourthWall.Info).toBe(true);
+        expect(pull.info instanceof FourthWall.GitHubInfo).toBe(true);
       });
 
       it("fetches new info data when the head changes", function () {
@@ -257,10 +259,10 @@ describe("Fourth Wall", function () {
 
     describe("parse", function () {
       it("calculates seconds since pull request creation date", function () {
-        spyOn(FourthWall.Pull.prototype, "elapsedSeconds").andReturn(60);
-        spyOn(FourthWall.Comment.prototype, "fetch");
-        spyOn(FourthWall.Status.prototype, "fetch");
-        var pull = new FourthWall.Pull({
+        spyOn(FourthWall.GitHubPull.prototype, "elapsedSeconds").andReturn(60);
+        spyOn(FourthWall.GitHubComment.prototype, "fetch");
+        spyOn(FourthWall.GitHubStatus.prototype, "fetch");
+        var pull = new FourthWall.GitHubPull({
           head: {sha: 'foo'}
         }, {
           collection: {}
@@ -274,9 +276,9 @@ describe("Fourth Wall", function () {
     describe("elapsedSeconds", function () {
       it("calculates seconds since creation date", function () {
         setupMoment("2013-09-09T10:01:00+01:00", window)
-        spyOn(FourthWall.Comment.prototype, "fetch");
-        spyOn(FourthWall.Status.prototype, "fetch");
-        var pull = new FourthWall.Pull({
+        spyOn(FourthWall.GitHubComment.prototype, "fetch");
+        spyOn(FourthWall.GitHubStatus.prototype, "fetch");
+        var pull = new FourthWall.GitHubPull({
           head: {sha: 'foo'}
         }, {
           collection: {}
@@ -293,7 +295,7 @@ describe("Fourth Wall", function () {
   describe("Pulls", function () {
     describe("url", function () {
       it("constructs a URL from user name and repo name", function () {
-        var pulls = new FourthWall.Pulls([], {
+        var pulls = new FourthWall.GitHubPulls([], {
           baseUrl: 'https://api.base.url/repos',
           userName: 'foo',
           repo: 'bar'
@@ -306,7 +308,7 @@ describe("Fourth Wall", function () {
   describe("ListItems", function () {
     describe("fetch", function () {
       it("collects open pull requests from repos", function () {
-        var repo = new FourthWall.Repo({
+        var repo = new FourthWall.GitHubRepo({
           userName: 'foo',
           repo: 'bar'
         });
@@ -323,30 +325,30 @@ describe("Fourth Wall", function () {
   describe("Status", function () {
     describe("parse", function () {
       it("does nothing when there are no statuses", function () {
-        expect(FourthWall.Status.prototype.parse([])).toBeFalsy();
+        expect(FourthWall.GitHubStatus.prototype.parse([])).toBeFalsy();
       });
 
       it("marks as failed when the latest status is not success and not pending", function () {
-        var res = FourthWall.Status.prototype.parse([
+        var res = FourthWall.GitHubStatus.prototype.parse([
           { state: 'error' }
         ]);
         expect(res.failed).toBeTruthy();
       });
 
       it("doesn't mark as failed when the latest status is success or pending", function () {
-        var res = FourthWall.Status.prototype.parse([
+        var res = FourthWall.GitHubStatus.prototype.parse([
           { state: 'pending' }
         ]);
         expect(res.failed).toBeFalsy();
 
-        res = FourthWall.Status.prototype.parse([
+        res = FourthWall.GitHubStatus.prototype.parse([
           { state: 'success' }
         ]);
         expect(res.failed).toBeFalsy();
       });
 
       it("doesn't mark as failed when a previous status failed", function () {
-        var res = FourthWall.Status.prototype.parse([
+        var res = FourthWall.GitHubStatus.prototype.parse([
           { state: 'pending' },
           { state: 'error' }
         ]);

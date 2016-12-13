@@ -2,13 +2,13 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.Repo = Backbone.Model.extend({
+  FourthWall.GitHubRepo = Backbone.Model.extend({
     defaults: {
       'baseUrl': 'https://api.github.com/repos'
     },
 
     initialize: function () {
-      this.master = new FourthWall.MasterStatus({
+      this.master = new FourthWall.GitHubMasterStatus({
         baseUrl: this.get('baseUrl'),
         userName: this.get('userName'),
         repo: this.get('repo')
@@ -18,7 +18,7 @@
         this.trigger('change');
       }, this);
 
-      this.pulls = new FourthWall.Pulls([], {
+      this.pulls = new FourthWall.GitHubPulls([], {
         baseUrl: this.get('baseUrl'),
         userName: this.get('userName'),
         repo: this.get('repo'),

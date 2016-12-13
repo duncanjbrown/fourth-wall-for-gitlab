@@ -2,10 +2,10 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.Pull = Backbone.Model.extend({
+  FourthWall.GitHubPull = Backbone.Model.extend({
     initialize: function () {
       this.set('repo', this.collection.repo);
-      this.comment = new FourthWall.Comment();
+      this.comment = new FourthWall.GitHubComment();
       this.comment.url = this.get('comments_url');
       this.on('change:comments_url', function () {
         this.comment.url = this.get('comments_url');
@@ -14,7 +14,7 @@
       this.comment.on('change', function () {
         this.trigger('change');
       }, this);
-      this.status = new FourthWall.Status({
+      this.status = new FourthWall.GitHubStatus({
         baseUrl: this.collection.baseUrl,
         userName: this.collection.userName,
         repo: this.get('repo'),
@@ -26,7 +26,7 @@
       this.status.on('change', function () {
         this.trigger('change');
       }, this);
-      this.info = new FourthWall.Info({
+      this.info = new FourthWall.GitHubInfo({
         baseUrl: this.collection.baseUrl,
         userName: this.collection.userName,
         repo: this.get('repo'),

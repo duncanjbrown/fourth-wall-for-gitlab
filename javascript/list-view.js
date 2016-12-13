@@ -12,9 +12,9 @@
       this.lis = [];
       this.collection.each(function (model) {
         var View;
-        if (model instanceof FourthWall.MasterStatus) {
+        if (model instanceof FourthWall.GitHubMasterStatus) {
           View = FourthWall.MasterView;
-        } else if (model instanceof FourthWall.Pull) {
+        } else if (model instanceof FourthWall.GitHubPull) {
           View = FourthWall.PullView;
         }
         if (!View) {

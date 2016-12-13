@@ -2,7 +2,7 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.Comment = Backbone.Model.extend({
+  FourthWall.GitHubComment = Backbone.Model.extend({
     parse: function (response) {
       var thumbsup = response.some(function(comment) {
         var checkFor = ["👍", ":+1:", ":thumbsup:"];

@@ -2,9 +2,9 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.Pulls = Backbone.Collection.extend({
+  FourthWall.GitHubPulls = Backbone.Collection.extend({
 
-    model: FourthWall.Pull,
+    model: FourthWall.GitHubPull,
 
     initialize: function (models, options) {
       this.baseUrl = options.baseUrl;

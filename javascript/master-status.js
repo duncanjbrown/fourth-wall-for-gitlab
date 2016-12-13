@@ -2,7 +2,7 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.MasterStatus = FourthWall.Status.extend({
+  FourthWall.GitHubMasterStatus = FourthWall.GitHubStatus.extend({
     url: function () {
       return [
         this.get('baseUrl'),

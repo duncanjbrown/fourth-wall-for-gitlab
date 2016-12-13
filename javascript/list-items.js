@@ -12,7 +12,7 @@
     },
 
     isMaster: function (x) {
-      return x instanceof FourthWall.MasterStatus;
+      return x instanceof FourthWall.GitHubMasterStatus;
     },
 
     isThumbsUp: function (x) {

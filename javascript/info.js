@@ -2,7 +2,7 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-  FourthWall.Info = Backbone.Model.extend({
+  FourthWall.GitHubInfo = Backbone.Model.extend({
 
     initialize: function () {
       this.on('change:sha', function () {
