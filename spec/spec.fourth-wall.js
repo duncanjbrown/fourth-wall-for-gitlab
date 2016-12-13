@@ -183,16 +183,14 @@ describe("Fourth Wall", function () {
   });
 
 
-  xdescribe("GitLabPull", function () {
-    describe("initialize", function () {
-      var pull;
-
-      beforeEach(function() {
-        spyOn(FourthWall.GitLabStatus.prototype, "fetch");
-      });
-
-      it("does not work", function () {
-        expect(true).toBe(false);
+  describe("GitLabPulls", function () {
+    describe("fetch", function () {
+      it("calls out to the appropriate URL", function () {
+        var pulls = new FourthWall.GitLabPulls([], {
+          projectId: 1,
+          baseUrl: 'https://my.gitlab.com/api/v3'
+        });
+        expect(pulls.url()).toBe('https://my.gitlab.com/api/v3/projects/1/merge_requests?state=opened')
       });
     });
   });
