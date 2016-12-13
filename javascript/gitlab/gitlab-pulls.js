@@ -16,7 +16,7 @@
         this.baseUrl,
         this.repo,
         'merge_requests',
-      ].join('/');// + "?state=opened";
+      ].join('/') + "?state=opened";
     },
 
     fetch: function() {

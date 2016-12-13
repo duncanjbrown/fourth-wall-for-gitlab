@@ -193,7 +193,7 @@ describe("Fourth Wall", function () {
       it("calls out to the appropriate URL", function () {
         var pulls = new FourthWall.GitLabPulls([], {
           repo: 'dxw/my-repo',
-          baseUrl: 'https://my.gitlab.com/api/v3'
+          baseUrl: 'https://my.gitlab.com/api/v3/projects'
         });
         expect(pulls.url()).toBe('https://my.gitlab.com/api/v3/projects/dxw/my-repo/merge_requests?state=opened')
       });
@@ -210,7 +210,7 @@ describe("Fourth Wall", function () {
     describe("fetch", function () {
       it("calls out to the appropriate URL", function () {
         var status = new FourthWall.GitLabStatus({
-          baseUrl: 'https://my.gitlab.com/api/v3',
+          baseUrl: 'https://my.gitlab.com/api/v3/projects',
           sha: 'abc123',
           repo: 'dxw/my-repo'
         });
