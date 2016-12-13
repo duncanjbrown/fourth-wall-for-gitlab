@@ -29,6 +29,9 @@
 
   FourthWall.getGitLabApiUrl = function() {
     var gitLabHost = FourthWall.getQueryVariable('gitlab_host');
+    if(!gitLabHost) {
+      throw 'No GitLab host is given. Set gitlab_host=my.gitlab.host in the URL.';
+    }
     return 'https://' + gitLabHost + '/api/v3';
   }
 

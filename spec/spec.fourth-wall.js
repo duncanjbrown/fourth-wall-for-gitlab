@@ -69,6 +69,9 @@ describe("Fourth Wall", function () {
   });
 
   describe("FetchRepos", function () {
+    beforeEach(function() {
+      spyOn(FourthWall, 'getRepositoryEndpoint').andReturn('https://foo.bar');
+    });
     describe("mergeRepoArrays", function () {
       it("should merge two repo arrays", function () {
         var repos1 = [{userName: "example", repo: "example"}],
