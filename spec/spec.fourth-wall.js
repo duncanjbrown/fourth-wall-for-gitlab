@@ -184,7 +184,7 @@ describe("Fourth Wall", function () {
     });
   });
 
-  xdescribe("GitLabRepo", function() {
+  describe("GitLabRepo", function() {
     it("behaves just like a GitHubRepo in all other respects", function() {});
   });
 
@@ -215,6 +215,15 @@ describe("Fourth Wall", function () {
           repo: 'dxw/my-repo'
         });
         expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/dxw/my-repo/repository/commits/abc123');
+      });
+    });
+
+    describe('getRepoName', function() {
+      it('returns the name formatted user/repo', function() {
+        var status = new FourthWall.GitLabStatus({
+          repo: 'dxw%2Fmy-repo'
+        });
+        expect(status.getRepoName()).toBe('dxw/my-repo');
       });
     });
 

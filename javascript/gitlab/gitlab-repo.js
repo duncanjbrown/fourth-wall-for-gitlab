@@ -32,7 +32,7 @@
     fetch: function () {
       this.pulls.fetch();
       this.master.fetch();
-    }
+    },
 
   });
 }());

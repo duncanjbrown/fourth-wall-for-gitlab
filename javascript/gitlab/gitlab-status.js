@@ -36,6 +36,10 @@
 
     isMaster: function() {
       return this.get('master');
+    },
+
+    getRepoName: function() {
+      return decodeURIComponent(this.get('repo'));
     }
   });
 }());

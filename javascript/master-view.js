@@ -8,7 +8,7 @@
 
       this.$el.addClass('failed');
       this.$el.html([
-        '<h2>', this.model.get('repo'), '</h2>',
+        '<h2>', this.model.getRepoName(), '</h2>',
         '<p>Failing on master</p>'
       ].join(''));
     }
