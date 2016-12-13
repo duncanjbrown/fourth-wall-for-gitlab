@@ -8,9 +8,10 @@
     },
 
     initialize: function () {
+      var repoIdentifier = this.get('userName') + '%2F' + this.get('repo');
       this.master = new FourthWall.GitLabStatus({
         baseUrl: this.get('baseUrl'),
-        repo: this.get('repo'),
+        repo: repoIdentifier,
         sha: 'master'
       });
 
@@ -20,7 +21,7 @@
 
       this.pulls = new FourthWall.GitLabPulls([], {
         baseUrl: this.get('baseUrl'),
-        repo: this.get('repo')
+        repo: repoIdentifier,
       });
 
       this.pulls.on('reset add remove', function () {

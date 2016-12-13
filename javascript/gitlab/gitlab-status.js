@@ -13,7 +13,6 @@
     url: function () {
       return [
         this.get('baseUrl'),
-        'projects',
         this.get('repo'),
         'repository',
         'commits',
