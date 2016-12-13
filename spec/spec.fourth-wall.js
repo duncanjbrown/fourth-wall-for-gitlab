@@ -197,6 +197,12 @@ describe("Fourth Wall", function () {
     });
   });
 
+  describe("GitLabPull", function() {
+    xdescribe("callbacks", function() {
+      it("behaves just like a GitHubPull", function() {});
+    });
+  });
+
   describe("GitLabStatus", function () {
     describe("fetch", function () {
       it("calls out to the appropriate URL", function () {
