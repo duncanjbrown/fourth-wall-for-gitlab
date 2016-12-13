@@ -30,7 +30,12 @@
       }
       response.created_at = moment(response.created_at);
       response.failed = response.status !== 'success' && response.status !== 'pending' && response.status !== 'running';
+      response.master = ('master' === this.get('sha'));
       return response;
+    },
+
+    isMaster: function() {
+      return this.get('master');
     }
   });
 }());

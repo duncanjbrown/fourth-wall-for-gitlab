@@ -12,11 +12,7 @@
     },
 
     isMaster: function (x) {
-      return x instanceof FourthWall.GitHubMasterStatus;
-    },
-
-    isThumbsUp: function (x) {
-      return x.comment.get('thumbsup');
+      return x.get('master');
     },
 
     compare: function (f, a, b) {
@@ -41,11 +37,6 @@
     comparator: function (a, b) {
 
       var res = this.compare(this.isMaster, a, b);
-      if (res != null) {
-        return res;
-      }
-
-      res = this.compare(this.isThumbsUp, a, b);
       if (res != null) {
         return res;
       }
