@@ -50,6 +50,15 @@ describe("Fourth Wall", function () {
     });
   });
 
+  describe("getGitLabApiUrl", function () {
+    beforeEach(function() {
+      spyOn(FourthWall, '_getLocationSearch').andReturn('?gitlab_host=my.gitlab.server');
+    });
+    it('returns the token param from the query string', function() {
+      expect(FourthWall.getGitLabApiUrl()).toEqual("https://my.gitlab.server/api/v3");
+    });
+  });
+
   describe("getToken", function () {
     beforeEach(function() {
       spyOn(FourthWall, '_getLocationSearch').andReturn('?token=foo');

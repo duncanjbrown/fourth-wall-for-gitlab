@@ -27,6 +27,11 @@
     return FourthWall.getQueryVariables(search)[name];
   };
 
+  FourthWall.getGitLabApiUrl = function() {
+    var gitLabHost = FourthWall.getQueryVariable('gitlab_host');
+    return 'https://' + gitLabHost + '/api/v3';
+  }
+
   FourthWall._getLocationSearch = function() {
     return window.location.search;
   };
