@@ -4,7 +4,7 @@
 
   FourthWall.GitLabPull = Backbone.Model.extend({
     initialize: function () {
-      this.set('projectId', this.collection.projectId);
+      this.set('repo', this.collection.repo);
       // this.comment = new FourthWall.GitHubComment();
       // this.comment.url = this.get('comments_url');
       // this.on('change:comments_url', function () {
@@ -16,7 +16,7 @@
       // }, this);
       this.status = new FourthWall.GitLabStatus({
         baseUrl: this.collection.baseUrl,
-        projectId: this.get('projectId'),
+        repo: this.get('repo'),
         sha: this.get('sha')
       });
       this.on('change:head', function () {

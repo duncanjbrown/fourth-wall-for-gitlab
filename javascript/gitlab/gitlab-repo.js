@@ -10,7 +10,7 @@
     initialize: function () {
       this.master = new FourthWall.GitLabStatus({
         baseUrl: this.get('baseUrl'),
-        projectId: this.get('projectId'),
+        repo: this.get('repo'),
         sha: 'master'
       });
 
@@ -20,7 +20,7 @@
 
       this.pulls = new FourthWall.GitLabPulls([], {
         baseUrl: this.get('baseUrl'),
-        projectId: this.get('projectId')
+        repo: this.get('repo')
       });
 
       this.pulls.on('reset add remove', function () {

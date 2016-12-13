@@ -192,10 +192,10 @@ describe("Fourth Wall", function () {
     describe("fetch", function () {
       it("calls out to the appropriate URL", function () {
         var pulls = new FourthWall.GitLabPulls([], {
-          projectId: 1,
+          repo: 'dxw/my-repo',
           baseUrl: 'https://my.gitlab.com/api/v3'
         });
-        expect(pulls.url()).toBe('https://my.gitlab.com/api/v3/projects/1/merge_requests?state=opened')
+        expect(pulls.url()).toBe('https://my.gitlab.com/api/v3/projects/dxw/my-repo/merge_requests?state=opened')
       });
     });
   });
@@ -212,9 +212,9 @@ describe("Fourth Wall", function () {
         var status = new FourthWall.GitLabStatus({
           baseUrl: 'https://my.gitlab.com/api/v3',
           sha: 'abc123',
-          projectId: 1
+          repo: 'dxw/my-repo'
         });
-        expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/1/repository/commits/abc123');
+        expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/dxw/my-repo/repository/commits/abc123');
       });
     });
 

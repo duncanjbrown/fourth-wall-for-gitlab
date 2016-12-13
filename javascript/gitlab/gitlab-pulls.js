@@ -8,14 +8,14 @@
 
     initialize: function (models, options) {
       this.baseUrl = options.baseUrl;
-      this.projectId = options.projectId;
+      this.repo = options.repo;
     },
 
     url: function () {
       return [
         this.baseUrl,
         'projects',
-        this.projectId,
+        this.repo,
         'merge_requests',
       ].join('/') + "?state=opened";
     },

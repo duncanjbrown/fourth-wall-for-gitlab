@@ -20,7 +20,7 @@
 
       this.pulls = new FourthWall.GitHubPulls([], {
         baseUrl: this.get('baseUrl'),
-        projectId: this.get('projectId')
+        repo: this.get('repo')
       });
 
       this.pulls.on('reset add remove', function () {

@@ -14,7 +14,7 @@
       return [
         this.get('baseUrl'),
         'projects',
-        this.get('projectId'),
+        this.get('repo'),
         'repository',
         'commits',
         this.get('sha')
