@@ -17,8 +17,7 @@
         this.get('projectId'),
         'repository',
         'commits',
-        this.get('sha'),
-        'builds'
+        this.get('sha')
       ].join('/');
     },
 
@@ -30,10 +29,9 @@
       if (!response.length) {
         return;
       }
-      var data = response[0];
-      data.created_at = moment(data.created_at);
-      data.failed = data.status !== 'success' && data.status !== 'pending' && data.status !== 'running';
-      return data;
+      response.created_at = moment(response.created_at);
+      response.failed = response.status !== 'success' && response.status !== 'pending' && response.status !== 'running';
+      return response;
     }
   });
 }());

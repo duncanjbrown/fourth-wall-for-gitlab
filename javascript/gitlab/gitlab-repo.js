@@ -8,10 +8,10 @@
     },
 
     initialize: function () {
-      this.master = new FourthWall.GitLabMasterStatus({
+      this.master = new FourthWall.GitLabStatus({
         baseUrl: this.get('baseUrl'),
         projectId: this.get('projectId'),
-        sha: this.get('sha')
+        sha: 'master'
       });
 
       // this.master.on('change:failed', function () {

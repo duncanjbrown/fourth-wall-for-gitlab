@@ -205,7 +205,7 @@ describe("Fourth Wall", function () {
           sha: 'abc123',
           projectId: 1
         });
-        expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/1/repository/commits/abc123/builds');
+        expect(status.url()).toBe('https://my.gitlab.com/api/v3/projects/1/repository/commits/abc123');
       });
     });
 
