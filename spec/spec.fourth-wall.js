@@ -55,7 +55,7 @@ describe("Fourth Wall", function () {
       spyOn(FourthWall, '_getLocationSearch').andReturn('?token=foo');
     });
     it('returns the token param from the query string', function() {
-      expect(FourthWall.getToken('token=foo')).toEqual("foo");
+      expect(FourthWall.getToken()).toEqual("foo");
     });
   });
 
