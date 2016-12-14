@@ -82,6 +82,10 @@
       data.elapsed_time = this.elapsedSeconds(data.created_at);
       return data;
     },
+
+    getRepoName: function() {
+      return decodeURIComponent(this.get('repo'));
+    },
     
     elapsedSeconds: function (created_at) {
       var now = moment();
