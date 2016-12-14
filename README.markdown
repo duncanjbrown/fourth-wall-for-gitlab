@@ -1,34 +1,39 @@
-# Fourth Wall
+# Fourth Wall for GitLab
+
+### This is a fork of the excellent AlphaGov project Fourth Wall, ported to GitLab
+
+It does not work with GitHub any more.
 
 [![Build Status](https://travis-ci.org/alphagov/fourth-wall.png)](https://travis-ci.org/alphagov/fourth-wall)
 
-Pure client-side pull request and build status monitor for Github repositories.
+Pure client-side pull request and build status monitor for GitLab repositories
 
 ![Screenshot of Fourth Wall](https://cloud.githubusercontent.com/assets/355033/6211416/6341db4e-b5d1-11e4-99d2-57b80a400a41.png)
 
 ## How to use
 
-The project is hosted through Github pages:
-`http://alphagov.github.io/fourth-wall/?token=_token_&gist=_gist_id_`
+Clone the repository and start an HTTP server of your choice, for example
 
-You will need to have a Github API token with access to the relevant
-repositories if you don't already have one. To do that, visit
-https://github.com/settings/applications and create a new personal
-access token. To use the `team` parameter you will need to give the token
-the `read:org` permission.
+```
+python -m SimpleHTTPServer
+```
 
-The following query parameters are required:
+You will need:
+ - The hostname of your GitLab instance
+ - A personal access token (https://docs.gitlab.com/ee/api/README.html#personal-access-tokens)
+ - A private Gist containing a list of repositories you are interested in
 
- - `token`: Your Github API token
-
-At least one of:
+Open your browser and point it at the app, including the following three pieces of information. You need all of them.
 
  - `gist`: ID of the Gist containing the list of repositories to monitor.
- - `team`: Github organisation and team name to build the list of repositories in the form `{org}/{team}` (requires the [`read:org`](https://developer.github.com/v3/orgs/) permission).
- - `team[]`: Given multiple times allows for more than one team to be used to build the list of repositories.
- - `file`: URL of a file in a Github repo that contains the list of repositories.
+ - `token`: Your GitLab access token
+ - `gitlab_host`: Your GitLab hostname
 
-Optional query parameters:
+The original project included support for filtering by teams and users, and marking repos as important.
+
+All of these features have been dropped.
+
+Other optional query parameters:
 
  - `listinterval`: Update interval for the list of monitored repos in seconds (default: 900)
  - `interval`: Update interval for monitored repos in seconds (default: 60)
@@ -47,49 +52,19 @@ The Gist should contain one or more JSON files with this syntax:
 You must make sure you set the language of the Gist to JSON as it will
 default to Text, which will not work.
 
-Optionally, the Gist can contain a JSON file named `users`, to list
-users the team cares about. Fourth Wall can then display PRs
-across your tracked apps opened by these users, if the `filterusers` param is set. Syntax:
-```json
-[
-  "username0",
-  "username1"
-]
-```
-
-Optionally, entries may also contain ```"important": true``` to indicate that a
-repository is important.  This has an effect only when the `filterusers` param
-is set: PRs on important repositories will always be displayed, even when they
-weren't opened by one of the listed users.
-
 If the Gist contains a file with the language set to `CSS`, it will be injected
 into a `<style>` block in the document head, so you can override the default
 styling without having to fork this repo.
 
-Examples:
+### Developing Fourth Wall for GitLab
 
-* A simple list of repos for the [Performance Platform team](https://gist.github.com/abersager/6449384)
-* A list of repos and custom CSS for the [Mainstream team](https://gist.github.com/norm/7248264)
-* A list of repos, custom CSS and users for the [Core team](https://gist.github.com/issyl0/70cf0c8f3d0b1ccd2f6e)
+This port is not backwards-compatible because the GitHub and GitLab APIs differ in subtle ways,
+and I don't have the Backbone chops to make it all work together with adapters and abstractions
+and things like that.
 
-## Support for other githubs
+Things it would be nice to have
 
-If you use github enterprise you must add the `baseUrl` to each repo object and
-add a token for that hostname. The url parameter for the other hostname should
- be of the form `<hostname>_token`.
-
-An example enterprise repository.
-
-```json
-[
-  {
-    "baseUrl": "https://myhost.com/api/v3/repos",
-    "userName": "<username of the repo owner>",
-    "repo": "<repository name>"
-  }
-]
-```
-
-To load repositories from a team on an enterprise instance you must prefix the
-hostname to the team url parameter as with the token `<hostname>_team` (or
-`<hostname>_team[]` for multiple teams).
+- a better test suite with end-to-end tests
+- Update the specs to work with Jasmine 2.5 and phantomJS
+- proper dependency management via `npm` or `yarn`
+- deeper integration with the GitLab API around comments
