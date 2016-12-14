@@ -62,6 +62,10 @@
       return this.get('user_notes_count');
     },
 
+    getWebUrl: function() {
+      return this.get('web_url');
+    },
+
     parse: function (data) {
       data.elapsed_time = this.elapsedSeconds(data.created_at);
       return data;

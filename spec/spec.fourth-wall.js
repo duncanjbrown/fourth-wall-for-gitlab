@@ -230,6 +230,17 @@ describe("Fourth Wall", function () {
       });
     });
 
+    describe("getWebUrl", function() {
+      it("returns the URL of the MR", function() {
+        var pull = new FourthWall.GitLabPull({
+          web_url: "http://foo.com/merge_requests/1"
+        }, {
+          collection: {}
+        });
+        expect(pull.getWebUrl()).toBe("http://foo.com/merge_requests/1");
+      });
+    });
+
     describe("getCommentCount", function() {
       it("returns the number of comments on the MR", function() {
         var pull = new FourthWall.GitLabPull({
