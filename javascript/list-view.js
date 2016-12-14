@@ -14,7 +14,7 @@
         var View;
         if (model.get('master')) {
           View = FourthWall.MasterView;
-        } else if (model instanceof FourthWall.GitHubPull || model instanceof FourthWall.GitLabPull) {
+        } else if (model instanceof FourthWall.GitLabPull) {
           View = FourthWall.PullView;
         }
         if (!View) {

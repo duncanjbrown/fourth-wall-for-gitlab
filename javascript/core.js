@@ -35,16 +35,8 @@
     return 'https://' + gitLabHost + '/api/v3';
   }
 
-  FourthWall.getGitHubApiUrl = function() {
-    return 'https://api.github.com';
-  }
-
-  FourthWall.getRepositoryEndpoint = function(github = false) {
-    if(github) {
-      return FourthWall.getGitHubApiUrl() + '/repos';
-    } else {
-      return FourthWall.getGitLabApiUrl() + '/projects';
-    }
+  FourthWall.getRepositoryEndpoint = function() {
+    return FourthWall.getGitLabApiUrl() + '/projects';
   };
 
   FourthWall._getLocationSearch = function() {
@@ -89,16 +81,6 @@
       var token = FourthWall.getToken();
       if (token !== false && token !== '') {
         xhr.setRequestHeader('PRIVATE-TOKEN', token);
-      }
-    };
-  };
-
-  var setupGitHubAuthentication = function (baseUrl) {
-    return function(xhr) {
-      var token = FourthWall.getToken();
-      if (token !== false && token !== '') {
-        xhr.setRequestHeader('Authorization', 'token ' + token);
-        xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
       }
     };
   };
