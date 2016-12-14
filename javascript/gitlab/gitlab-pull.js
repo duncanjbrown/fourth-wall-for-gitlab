@@ -54,15 +54,15 @@
       return this.get('author').avatar_url;
     },
 
-    // parse: function (data) {
-    //   data.elapsed_time = this.elapsedSeconds(data.created_at);
-    //   return data;
-    // },
-    //
-    // elapsedSeconds: function (created_at) {
-    //   var now = moment();
-    //   created_at = moment(created_at);
-    //   return now.unix() - created_at.unix();
-    // }
+    parse: function (data) {
+      data.elapsed_time = this.elapsedSeconds(data.created_at);
+      return data;
+    },
+    
+    elapsedSeconds: function (created_at) {
+      var now = moment();
+      created_at = moment(created_at);
+      return now.unix() - created_at.unix();
+    }
   });
 }());
