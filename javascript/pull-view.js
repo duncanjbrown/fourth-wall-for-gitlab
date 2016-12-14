@@ -12,8 +12,6 @@
     render: function () {
       this.$el.removeClass();
 
-      window.x =this.model;
-
       if (!this.model.getAuthorName()) {
         // FIXME: Should never get here but does after master was
         // failing

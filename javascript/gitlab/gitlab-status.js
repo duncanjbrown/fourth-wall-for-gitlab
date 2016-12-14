@@ -8,6 +8,9 @@
       this.on('change:sha', function () {
         this.fetch();
       }, this);
+      if(this.get('inspect')) {
+        window.x = this;
+      }
     },
 
     url: function () {

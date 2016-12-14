@@ -12,6 +12,7 @@
       this.master = new FourthWall.GitLabStatus({
         baseUrl: this.get('baseUrl'),
         repo: repoIdentifier,
+        inspect: true,
         sha: 'master'
       });
 
