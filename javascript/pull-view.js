@@ -25,24 +25,10 @@
 
       this.$el.addClass(this.ageClass(this.model.get('elapsed_time')));
 
-      if (!this.model.collection.important) {
-        this.$el.addClass('unimportant-repo');
-      }
-
-      if (this.model.comment.get('thumbsup')) {
-        this.$el.addClass("thumbsup");
-      }
-
       var suffix = "";
-      if (this.model.comment.get('numComments') !== 1) {
-        suffix = "s";
-      }
 
-      if (this.model.info.get('mergeable') === false){
+      if (!this.model.isMergeable()){
         var statusString = '<p class="status not-mergeable">No auto merge</p>';
-      } else if (this.model.status.get('state')){
-        var state = this.model.status.get('state');
-        var statusString = '<p class="status ' + state + '">Status: ' + state + '</p>';
       } else {
         var statusString = '<p class="status">No status</p>';
       }

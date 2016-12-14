@@ -229,6 +229,25 @@ describe("Fourth Wall", function () {
         expect(pull.getAuthorAvatar()).toBe('http://gravatar.com/foo');
       });
     });
+
+    describe("isMergeable", function() {
+      it("returns true if the MR can be merged", function() {
+        var goodPull = new FourthWall.GitLabPull({
+          merge_status: 'can_be_merged'
+        }, {
+          collection: {}
+        });
+
+        var badPull = new FourthWall.GitLabPull({
+          merge_status: 'do_not_merge'
+        }, {
+          collection: {}
+        });
+        
+        expect(goodPull.isMergeable()).toBe(true);
+        expect(badPull.isMergeable()).toBe(false);
+      });
+    });
   });
 
   describe("GitLabStatus", function () {

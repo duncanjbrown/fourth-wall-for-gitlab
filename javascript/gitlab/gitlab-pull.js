@@ -54,6 +54,10 @@
       return this.get('author').avatar_url;
     },
 
+    isMergeable: function() {
+      return 'can_be_merged' === this.get('merge_status');
+    },
+
     parse: function (data) {
       data.elapsed_time = this.elapsedSeconds(data.created_at);
       return data;
