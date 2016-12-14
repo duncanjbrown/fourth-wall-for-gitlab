@@ -2,7 +2,6 @@
   "use strict";
   window.FourthWall = window.FourthWall || {};
 
-
   FourthWall.PullView = Backbone.View.extend({
     tagName: 'li',
 
@@ -27,10 +26,12 @@
 
       var suffix = "";
 
-      if (!this.model.isMergeable()){
-        var statusString = '<p class="status not-mergeable">No auto merge</p>';
+      if (this.model.isMergeable()){
+        var statusString = '<p class="status">OK to merge</p>';
+      } else if(this.model.isUnchecked()) {
+        var statusString = '<p class="status not-mergeable">Checks pending</p>';
       } else {
-        var statusString = '<p class="status">No status</p>';
+        var statusString = '<p class="status not-mergeable">Cannot merge</p>';
       }
 
       var commentCount = this.model.getCommentCount();

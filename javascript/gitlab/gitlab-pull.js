@@ -63,7 +63,11 @@
     },
 
     isMergeable: function() {
-      return 'can_be_merged' === this.get('merge_status');
+      return !this.isUnchecked() && 'can_be_merged' === this.get('merge_status');
+    },
+
+    isUnchecked: function() {
+      return 'unchecked' === this.get('merge_status');
     },
 
     getCommentCount: function() {
