@@ -391,21 +391,4 @@ describe("Fourth Wall", function () {
       });
     });
   });
-
-  describe("ListItems", function () {
-    describe("fetch", function () {
-      it("collects open pull requests from repos", function () {
-        var repo = new FourthWall.GitLabRepo({
-          userName: 'foo',
-          repo: 'bar'
-        });
-        repo.pulls.reset();
-        var items = new FourthWall.ListItems([], {
-          repos: new FourthWall.Repos([
-            
-          ])
-        });
-      });
-    });
-  });
 });
