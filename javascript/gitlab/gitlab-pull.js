@@ -50,8 +50,16 @@
       return this.get('author').name;
     },
 
+    getAuthorUsername: function() {
+      return this.get('author').username;
+    },
+
     getAuthorAvatar: function() {
       return this.get('author').avatar_url;
+    },
+
+    getNumber: function() {
+      return this.get('iid');
     },
 
     isMergeable: function() {

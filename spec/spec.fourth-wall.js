@@ -230,6 +230,30 @@ describe("Fourth Wall", function () {
       });
     });
 
+    describe("getNumber", function() {
+      it("returns the URL of the MR", function() {
+        var pull = new FourthWall.GitLabPull({
+          iid: 25
+        }, {
+          collection: {}
+        });
+        expect(pull.getNumber()).toBe(25);
+      });
+    });
+
+    describe("getAuthorUsername", function() {
+      it("returns the URL of the MR", function() {
+        var pull = new FourthWall.GitLabPull({
+          author: {
+            username: 'admin'
+          }
+        }, {
+          collection: {}
+        });
+        expect(pull.getAuthorUsername()).toBe("admin");
+      });
+    });
+
     describe("getWebUrl", function() {
       it("returns the URL of the MR", function() {
         var pull = new FourthWall.GitLabPull({
