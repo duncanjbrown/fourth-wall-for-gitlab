@@ -29,7 +29,7 @@
         return;
       }
       response.created_at = moment(response.created_at);
-      response.failed = response.state !== 'success' && response.state !== 'pending' && response.state !== 'running';
+      response.failed = response.state && response.state !== 'success' && response.state !== 'pending' && response.state !== 'running';
       response.master = ('master' === this.get('sha'));
       return response;
     },
