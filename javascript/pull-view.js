@@ -33,13 +33,7 @@
         var statusString = '<p class="status">No status</p>';
       }
 
-      var commentCount = 0;
-      if (this.model.comment.get('numComments')){
-        commentCount = commentCount + this.model.comment.get('numComments');
-      }
-      if (this.model.info.get('review_comments')){
-        commentCount = commentCount + this.model.info.get('review_comments');
-      }
+      var commentCount = this.model.getCommentCount();
 
       var assignee = "";
       if (this.model.get('assignee')) {

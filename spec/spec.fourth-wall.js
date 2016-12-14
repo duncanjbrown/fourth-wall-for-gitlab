@@ -230,6 +230,17 @@ describe("Fourth Wall", function () {
       });
     });
 
+    describe("getCommentCount", function() {
+      it("returns the number of comments on the MR", function() {
+        var pull = new FourthWall.GitLabPull({
+          user_notes_count: 1
+        }, {
+          collection: {}
+        });
+        expect(pull.getCommentCount()).toBe(1);
+      });
+    });
+
     describe("isMergeable", function() {
       it("returns true if the MR can be merged", function() {
         var goodPull = new FourthWall.GitLabPull({

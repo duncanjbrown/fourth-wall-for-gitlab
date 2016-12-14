@@ -58,6 +58,10 @@
       return 'can_be_merged' === this.get('merge_status');
     },
 
+    getCommentCount: function() {
+      return this.get('user_notes_count');
+    },
+
     parse: function (data) {
       data.elapsed_time = this.elapsedSeconds(data.created_at);
       return data;
