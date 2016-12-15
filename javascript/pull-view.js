@@ -33,6 +33,7 @@
       }
 
       var commentCount = this.model.getCommentCount();
+      var suffix = commentCount > 1 ? 's' : '';
 
       var assignee = "";
       if (this.model.get('assignee')) {
