@@ -25,11 +25,11 @@
       var suffix = "";
 
       if (this.model.isMergeable()){
-        var statusString = '<p class="status">OK to merge</p>';
+        var statusString = '<p class="status success">OK to merge</p>';
       } else if(this.model.isUnchecked()) {
-        var statusString = '<p class="status not-mergeable">Checks pending</p>';
+        var statusString = '<p class="status">Status pending</p>';
       } else {
-        var statusString = '<p class="status not-mergeable">Cannot merge</p>';
+        var statusString = '<p class="status failure">Cannot merge</p>';
       }
 
       var commentCount = this.model.getCommentCount();
