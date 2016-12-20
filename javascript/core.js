@@ -28,7 +28,7 @@
   };
 
   FourthWall.getGitLabApiUrl = function() {
-    var gitLabHost = FourthWall.getQueryVariable('gitlab_host');
+    var gitLabHost = FourthWall.getGitLabHost();
     if(!gitLabHost) {
       console.log( 'No GitLab host is given. Set gitlab_host=my.gitlab.host in the URL.' )
     }
@@ -38,6 +38,15 @@
   FourthWall.getRepositoryEndpoint = function() {
     return FourthWall.getGitLabApiUrl() + '/projects';
   };
+
+  FourthWall.getGitLabHost = function() {
+    var host;
+    host = FourthWall.getQueryVariable('gitlab_host');
+    if(!host) {
+      host = localStorage.getItem('gitlab_host');
+    }
+    return host;
+  }
 
   FourthWall._getLocationSearch = function() {
     return window.location.search;
