@@ -29,6 +29,8 @@ Open your browser and point it at the app, including the following three pieces 
  - `token`: Your GitLab access token
  - `gitlab_host`: Your GitLab hostname
 
+If you prefer not to pass it in the URL, you may set a value for `token` in localStorage and skip the URL parameter.
+
 The original project included support for filtering by teams and users, and marking repos as important.
 
 All of these features have been dropped.

@@ -52,7 +52,12 @@
   };
 
   FourthWall.getToken = function() {
-    return FourthWall.getQueryVariable('token');
+    var token;
+    token = FourthWall.getQueryVariable('token');
+    if(!token) {
+      token = localStorage.getItem('token');
+    }
+    return token;
   };
 
   FourthWall.fetchDefer = function(options) {
