@@ -23,25 +23,27 @@ You will need:
  - A personal access token (https://docs.gitlab.com/ee/api/README.html#personal-access-tokens)
  - A private Gist containing a list of repositories you are interested in
 
-Open your browser and point it at the app, including the following three pieces of information. You need all of them.
+Open your browser and point it at the app, including the following two pieces of information and at least one of `gist` or `json`.
 
- - `gist`: ID of the Gist containing the list of repositories to monitor.
  - `token`: Your GitLab access token
  - `gitlab_host`: Your GitLab hostname
 
-If you prefer not to pass it in the URL, you may set a value for `token` in localStorage and skip the URL parameter.
-
-The original project included support for filtering by teams and users, and marking repos as important.
-
-All of these features have been dropped.
+Visiting `/config.html` will allow you to set default values for `token` and `gitlab_host` in the browser's local storage.
 
 Other optional query parameters:
 
  - `listinterval`: Update interval for the list of monitored repos in seconds (default: 900)
  - `interval`: Update interval for monitored repos in seconds (default: 60)
  - `filterusers`: Only show PRs from specific users, if set in config (default: false)
+ - `gist`: the id of a gist containing one or more JSON files and at most one CSS file
+ - _new_ `css`: include a CSS file from the named URL
+ - _new_ `json`: read a list of repositories from a json file at the named URL
 
-The Gist should contain one or more JSON files with this syntax:
+The original project included support for filtering by teams and users, and marking repos as important.
+
+All of these features have been dropped.
+
+JSON files should be provided in the following format:
 ```json
 [
   {
@@ -51,12 +53,10 @@ The Gist should contain one or more JSON files with this syntax:
 ]
 ```
 
-You must make sure you set the language of the Gist to JSON as it will
-default to Text, which will not work.
+Note that JSON files included in Gists must have their language set to JSON or they will not be included.
 
-If the Gist contains a file with the language set to `CSS`, it will be injected
-into a `<style>` block in the document head, so you can override the default
-styling without having to fork this repo.
+Including a CSS file in a Gist, or placing the URL of one in the `css` parameter, will cause the styles to be injected
+into a `<style>` block in the document head.
 
 ### Developing Fourth Wall for GitLab
 
