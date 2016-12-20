@@ -17,6 +17,10 @@
       promises.push(fetchReposFromJSONFile());
     }
 
+    if (FourthWall.cssUrl) {
+      promises.push(fetchCSS());
+    }
+
     var d = $.Deferred();
     $.when.apply(null, promises).done(function() {
       var allRepos = [].reduce.call(arguments, FetchRepos.mergeRepoArrays, []);
@@ -55,9 +59,7 @@
           if ($.inArray(language, ['JavaScript', 'JSON', null]) !== -1) {
             repos = JSON.parse(fileData.content);
           } else if (language === "CSS") {
-            var $custom_css = $('<style>');
-            $custom_css.text( fileData.content );
-            $('head').append( $custom_css );
+            FourthWall.appendCSS(fileData.content);
           }
         });
         return repos;
@@ -74,4 +76,14 @@
       }
     });
   };
+
+  var fetchCSS = function() {
+    return FourthWall.fetchDefer({
+      url: FourthWall.cssUrl,
+      done: function(result) {
+        FourthWall.appendCSS(result);
+      }
+    });
+  }
+
 }());

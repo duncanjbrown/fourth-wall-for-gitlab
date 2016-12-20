@@ -106,11 +106,21 @@
     }
   };
 
+  FourthWall.appendCSS = function(css) {
+    var $custom_css = $('<style>');
+    $custom_css.text( css );
+    $('head').append( $custom_css );
+  };
+
   FourthWall.gistId = stripSlash(
     FourthWall.getQueryVariable('gist')
   );
 
   FourthWall.jsonUrl = stripSlash(
     FourthWall.getQueryVariable('json')
+  );
+
+  FourthWall.cssUrl = stripSlash(
+    FourthWall.getQueryVariable('css')
   );
 })();
