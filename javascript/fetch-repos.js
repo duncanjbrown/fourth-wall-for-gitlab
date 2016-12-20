@@ -13,6 +13,10 @@
       promises.push(fetchReposFromGist());
     }
 
+    if (FourthWall.jsonUrl) {
+      promises.push(fetchReposFromJSONFile());
+    }
+
     var d = $.Deferred();
     $.when.apply(null, promises).done(function() {
       var allRepos = [].reduce.call(arguments, FetchRepos.mergeRepoArrays, []);
@@ -57,6 +61,16 @@
           }
         });
         return repos;
+      }
+    });
+  };
+
+  var fetchReposFromJSONFile = function() {
+    // e.g. https://api.github.com/repos/roc/deploy-lag-radiator/contents/repos/performance-platform.json?ref=gh-pages
+    return FourthWall.fetchDefer({
+      url: FourthWall.jsonUrl,
+      done: function(result) {
+        return result;
       }
     });
   };

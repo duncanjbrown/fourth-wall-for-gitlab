@@ -109,4 +109,8 @@
   FourthWall.gistId = stripSlash(
     FourthWall.getQueryVariable('gist')
   );
+
+  FourthWall.jsonUrl = stripSlash(
+    FourthWall.getQueryVariable('json')
+  );
 })();
