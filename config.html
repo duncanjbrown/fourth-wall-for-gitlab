@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Fourth Wall configuration</title>
+    <script src="javascript/vendor/jquery-2.0.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Fourth Wall configuration</h1>
+    <p>Instead of passing token= and gitlab_host= in the URL, you can specify defaults here.</p>
+    <div id="current-values">
+      <h4>Current values</h4>
+      <ul id="saved-values"></ul>
+    </div>
+    <form id="fourth-wall-config" method="POST">
+      <label for="token">GitLab API Token</label>
+      <input name="token" type="text" />
+      <br />
+
+      <label for="gitlab_host">GitLab hostname</label>
+      <input name="gitlab_host" type="text" />
+      <br />
+
+      <input type="submit" value="save">
+      <h3 id="form-status" style="display: none"></h3>
+    </form>
+  </body>
+  <script src="javascript/config-form.js"></script>
+</html>
